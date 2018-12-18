@@ -7,8 +7,9 @@ package projetoso;
 
 /**
  *
- * @author Ricardo
+ * @author *Abílio - 8170054* | *Ricardo - 8170278* | *Vitor - 8170312*
  */
+
 public class Motor {
     
 }
