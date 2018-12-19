@@ -25,19 +25,29 @@ public class ProjetoSO {
         // TODO code application logic here
 
         int i = 0;
-
+        
+        //Ler ficheiro com o número de andares e peso máximo
         FileManager fm = new FileManager();
-
         fm.readFile("elevador.txt");
 
         JFrame elevador = new JFrame("Elevador");
         JPanel panela = new JPanel();
-       // elevador.setLayout(new GridLayout(2, 2));
+
+        //Não sei o que faz
+        // elevador.setLayout(new GridLayout(2, 2));
         panela.setLayout(new GridLayout(2, 2));
-        panela.setSize(200, 350);
-        
-        elevador.setSize(400, 700);
-        elevador.setLocation(1920 / 2 - 200, 1080 / 2 - 350);
+        panela.setSize(250, 350);
+
+        //Definir tamanho da janela e localização inicial
+        elevador.setSize(400, 800);
+        elevador.setLocation(1920 / 2 - 300, 1080 / 2 - 400);
+
+        // Construtor do label que apresenta o andar atual
+        JLabel andarAtual = new JLabel("Andar atual: ");
+        panela.add(andarAtual);
+        andarAtual.setSize(200, 200);
+
+        //Cicloque acrecenta botões dependendo do número de andares definido
         JButton[] bt = new JButton[fm.getPisos()];
         while (i < fm.getPisos()) {
             bt[i] = new JButton("" + i);
@@ -45,9 +55,9 @@ public class ProjetoSO {
             panela.add(bt[i]);
             i++;
         }
-        
+
         elevador.add(panela);
-        elevador.setBackground(Color.yellow);
+        elevador.setBackground(Color.green);
         elevador.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         elevador.setVisible(true);
 

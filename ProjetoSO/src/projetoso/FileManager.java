@@ -37,7 +37,7 @@ public class FileManager {
        }catch(FileNotFoundException ex){  
            System.out.println("FileNotFound");
        }catch(IOException | ParseException e){
-           System.out.println("Bilo");
+           System.out.println("Exception");
        }
        
        
