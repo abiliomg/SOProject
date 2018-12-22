@@ -1,4 +1,4 @@
 {
-"pisos": 6
+"pisos": 7
 "carga": 350
 }
