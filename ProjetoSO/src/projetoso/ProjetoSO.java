@@ -5,10 +5,8 @@
  */
 package projetoso;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.awt.*;
 
 /**
  *
@@ -86,7 +84,7 @@ public class ProjetoSO {
 
         System.out.println(fm.getCarga());
         System.out.println(fm.getPisos());
-
+        
     }
 
 }
