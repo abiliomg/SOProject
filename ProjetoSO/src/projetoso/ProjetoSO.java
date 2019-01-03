@@ -78,7 +78,8 @@ public class ProjetoSO implements ActionListener {
             }
         } else {
 
-            System.out.println("Por favor:" + e.getActionCommand());
+            System.out.println("Andar "
+                    + ": " + e.getActionCommand());
             queue.add(Integer.parseInt(e.getActionCommand()));
 
         }

@@ -38,13 +38,11 @@ class Action implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        
-        
+
         System.out.println("Por favor:" + e.getActionCommand());
         sh1.setPisoS(Integer.parseInt(e.getActionCommand()));
         sh1.setBtPressed(false);
-        
-       
+
         /*
         try {
             sem.acquire();
@@ -77,7 +75,7 @@ public class Botoneira implements Runnable {
         FileManager fm = new FileManager();
         mt = new Motor(sh1);
         int i = 0, piso, gridHelper;
-        ProjetoSO act = new ProjetoSO(sh1,mt);
+        ProjetoSO act = new ProjetoSO(sh1, mt);
 
         //Ler ficheiro com o número de andares e peso máximo
         fm.readFile("elevador.txt");
@@ -95,18 +93,19 @@ public class Botoneira implements Runnable {
         Dimension frameDimension = new Dimension(400, 300);
 
         JFrame elevador = new JFrame("Elevador");
+
         //Definir tamanho da janela e localização inicial
         elevador.setSize(frameDimension);
         elevador.setMaximumSize(frameDimension);
         elevador.setLocation(1920 / 2 - 200, 1080 / 2 - 150);
+
         // Construtor do label que apresenta o andar atual
-        JLabel andarAtual = new JLabel("Andar atual: ");
-        andarAtual.setHorizontalAlignment(SwingConstants.RIGHT);
-        panela.add(andarAtual);
-        andarAtual.setSize(30, 30);
-        JLabel andarMostrar = new JLabel("" + sh1.getCurrentFloor());
+        JLabel elevadorSign = new JLabel("");
+        elevadorSign.setHorizontalAlignment(SwingConstants.LEFT);
+        panela.add(elevadorSign);
+        elevadorSign.setSize(30,70);
+        JLabel andarMostrar = new JLabel("Bem-vindo ao elevador pressione um botão com o andar que pretende, e de seguida, feche a porta");
         panela.add(andarMostrar);
-        //Ciclo que acrecenta botões dependendo do número de andares definido 
         JButton[] bt = new JButton[fm.getPisos()];
         JButton fechar = new JButton("Fechar");
         fechar.setActionCommand("F");
@@ -118,6 +117,8 @@ public class Botoneira implements Runnable {
         JLabel clear = new JLabel(" ");
         JLabel clear2 = new JLabel(" ");
         JLabel clear3 = new JLabel(" ");
+        
+        //Ciclo que acrecenta botões dependendo do número de andares definido 
         while (i < fm.getPisos()) {
             piso = i;
             bt[i] = new JButton("" + piso);

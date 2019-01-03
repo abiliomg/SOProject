@@ -32,7 +32,7 @@ public class Display implements Runnable {
     @Override
     public void run() {
         JFrame teste = new JFrame();
-        teste.setSize(200, 200);
+        teste.setSize(200, 300);
 
         JPanel panel = new JPanel();
         GridLayout grid = new GridLayout(2,2);
@@ -49,8 +49,8 @@ public class Display implements Runnable {
 
         while (true) {
 
-            dis.setText("" + sh1.getCurrentFloor());
-            door.setText("" + sh1.isDoorsOpen());
+            dis.setText("  Andar Atual: "+ sh1.getCurrentFloor());
+            door.setText("  Estado da Porta: " + sh1.isDoorsOpen());
             if (Thread.interrupted()) {
                 return;
             }
