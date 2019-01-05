@@ -5,12 +5,15 @@
  */
 package projetoso;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author Dumbr
  */
 public class SharedOBJ {
     
+    Semaphore semP = new Semaphore(1);
     private int currentFloor;
     private int pisoS;
     private boolean btPressed;

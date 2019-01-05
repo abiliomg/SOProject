@@ -23,13 +23,11 @@ public class ProjetoSO implements ActionListener {
     private int pisoSelecionado;
     SharedOBJ sh1;
     private Motor mt;
-    Semaphore sem;
     Portas pt;
     PriorityQueue<Integer> queue = new PriorityQueue<Integer>();
 
     public ProjetoSO(SharedOBJ sh, Motor mt) {
         sh1 = sh;
-        sem = new Semaphore(1);
         this.mt = mt;
         pt = new Portas(sh1);
     }
@@ -66,10 +64,10 @@ public class ProjetoSO implements ActionListener {
 
         if (e.getActionCommand() == "A") {
             new Thread(pt).start();
-            
+
         } else if (e.getActionCommand() == "F") {
             if (queue.peek() == null) {
-                
+
             } else {
                 pt.setCommand("F");
                 new Thread(pt).start();
@@ -80,14 +78,21 @@ public class ProjetoSO implements ActionListener {
 
             System.out.println("Andar "
                     + ": " + e.getActionCommand());
-            queue.add(Integer.parseInt(e.getActionCommand()));
+            queue.add(Integer.parseInt(e.getActionCommand()));     
+            startMotor();
 
         }
     }
 
     public void startMotor() {
+   
+        if(sh1.isDoorsOpen() == true){
+            pt.setCommand("F");
+            new Thread(pt).start();
+        }
         new Thread(mt).start();
-        sem.release();
+        mt.sendPisoS(queue);
+   
     }
 
 }

@@ -48,6 +48,7 @@ public class Portas implements Runnable {
 
     public void closeDoors() {
         sh1.setDoorsOpen(false);
+
     }
 
 }
