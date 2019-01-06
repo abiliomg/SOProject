@@ -45,6 +45,7 @@ public class Botoneira implements Runnable {
 
         //Ler ficheiro com o número de andares e peso máximo
         fm.readFile("elevador.txt");
+        sh1.setMaxCarga(fm.getCarga());
         JPanel panela = new JPanel();
         Dimension panelDimension = new Dimension(300, 300);
         if (fm.getPisos() % 2 == 0) {
@@ -77,6 +78,12 @@ public class Botoneira implements Runnable {
         fechar.setActionCommand("F");
         fechar.addActionListener(act);
         JButton abrir = new JButton("Abrir");
+        JButton entrar = new JButton("Entrar");
+        JButton sair = new JButton("Sair");
+        entrar.setActionCommand("EN");
+        sair.setActionCommand("SA");
+        entrar.addActionListener(act);
+        sair.addActionListener(act);
         abrir.setActionCommand("A");
         abrir.addActionListener(act);
         Dimension buttonDimension = new Dimension(10, 10);
@@ -103,7 +110,9 @@ public class Botoneira implements Runnable {
             panela.add(clear2);
             panela.add(clear3);
         }
-
+        
+        panela.add(entrar);
+        panela.add(sair);
         panela.add(fechar);
         panela.add(abrir);
         elevador.add(panela);

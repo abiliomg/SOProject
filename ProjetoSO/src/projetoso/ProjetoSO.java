@@ -20,6 +20,7 @@ import javax.swing.plaf.basic.BasicOptionPaneUI;
  */
 public class ProjetoSO implements ActionListener {
 
+    FileManager fm;
     private int pisoSelecionado;
     SharedOBJ sh1;
     private Motor mt;
@@ -30,6 +31,8 @@ public class ProjetoSO implements ActionListener {
         sh1 = sh;
         this.mt = mt;
         pt = new Portas(sh1);
+        fm = new FileManager();
+
     }
 
     /**
@@ -57,6 +60,16 @@ public class ProjetoSO implements ActionListener {
         } else if (e.getActionCommand() == "F") {
             pt.setCommand("F");
             new Thread(pt).start();
+        } else if (e.getActionCommand() == "EN") {
+            if (sh1.isMoving() == false) {
+                sh1.setCarga(60);
+            }
+
+        } else if (e.getActionCommand() == "SA") {
+            if (sh1.isMoving() == false) {
+                sh1.setCarga(-60);
+            }
+
         } else {
 
             System.out.println("Andar "
@@ -69,12 +82,12 @@ public class ProjetoSO implements ActionListener {
 
     public void startMotor() {
 
-        if (sh1.isDoorsOpen() == true) {
-            pt.setCommand("F");
-            new Thread(pt).start();
-        }
+        pt.setCommand("AF");
+        new Thread(pt).start();
+
         new Thread(mt).start();
         mt.sendPisoS(queue);
+        fm.writeToFile(queue.peek(), sh1.getCarga());
 
     }
 

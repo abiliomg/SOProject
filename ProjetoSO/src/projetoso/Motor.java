@@ -39,7 +39,7 @@ public class Motor implements Runnable {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        while (sh1.isDoorsOpen()) {
+        while (sh1.isDoorsOpen() || sh1.getCarga() > sh1.getMaxCarga()) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException ex) {
@@ -69,14 +69,15 @@ public class Motor implements Runnable {
                 Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        sh1.semP.release();
         sh1.setMoving(false);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         sem.release();
-        
 
     }
 
@@ -95,11 +96,13 @@ public class Motor implements Runnable {
             }
         }
         sh1.setMoving(false);
+        sh1.semP.release();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
+
         sem.release();
 
     }

@@ -31,10 +31,30 @@ public class Portas implements Runnable {
     public void run() {
         if (this.command == "F") {
             closeDoors();
-        } else if (this.command == "A" && sh1.isMoving()== false) {
+        } else if (this.command == "A" && sh1.isMoving() == false) {
             openDoors();
-        }
-        
+        } else if (this.command == "AF") {
+            closeDoors();
+            System.out.println("Permits" + sh1.semP.availablePermits());
+            try {
+
+                sh1.semP.acquire();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Portas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                sh1.semP.acquire();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Portas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            openDoorsAF();
+        } 
+    }
+
+    public void openDoorsAF() {
+        openDoors();
+        sh1.semP.release();
     }
 
     public void openDoors() {
@@ -45,11 +65,12 @@ public class Portas implements Runnable {
             Logger.getLogger(Portas.class.getName()).log(Level.SEVERE, null, ex);
         }
         sh1.setDoorsOpen(false);
+
     }
 
     public synchronized void closeDoors() {
         sh1.setDoorsOpen(false);
-       // notifyAll();
+        // notifyAll();
     }
 
 }

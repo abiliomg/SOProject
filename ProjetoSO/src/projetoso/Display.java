@@ -73,9 +73,14 @@ public class Display implements Runnable {
         GridLayout grid = new GridLayout(2, 2);
         panel.setLayout(grid);
         teste.add(panel);
+        JLabel maxCarga = new JLabel(" Carga Máxima: " + sh1.getMaxCarga());
+        JLabel carga = new JLabel("" + sh1.getCarga());
         JLabel dis = new JLabel("" + sh1.getCurrentFloor());
         // JLabel door = new JLabel("Teste");
+        
         panel.add(dis);
+        panel.add(carga);
+        panel.add(maxCarga);
         // panel.add(door);
         portas.add(img);
         teste.setLocation(width / 2 + 185, height / 2 - 240);
@@ -90,8 +95,14 @@ public class Display implements Runnable {
         ImageIcon elevatorClosed = new ImageIcon(auxEleC2);
 
         while (true) {
-
-            dis.setText("  Andar Atual: " + sh1.getCurrentFloor());
+            
+            carga.setText(" Carga: " + sh1.getCarga());
+            if(sh1.getCarga() > sh1.getMaxCarga()){
+                carga.setForeground(Color.red);
+            }else{
+                carga.setForeground(Color.green);
+            }
+            dis.setText(" Andar Atual: " + sh1.getCurrentFloor());
             // door.setText("  Estado da Porta: " + sh1.isDoorsOpen());
             if (sh1.isDoorsOpen() == true) {
                 img.setIcon(elevatorOpen);
