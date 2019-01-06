@@ -49,7 +49,7 @@ public class FileManager {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        writer.append("Piso: " + piso + "   Carga:" + carga + "   Hora:" + (System.currentTimeMillis()));
+        writer.append("Piso: " + piso + "   Carga:" + carga);
         writer.append(String.format("%n"));
         writer.flush();
 

@@ -16,7 +16,6 @@ public class SharedOBJ {
     Semaphore semP = new Semaphore(1);
     private int currentFloor;
     private int pisoS;
-    private boolean btPressed;
     private boolean moving = false;
     private boolean doorsOpen = true;
     private int carga = 0;
@@ -54,18 +53,6 @@ public class SharedOBJ {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
-    }
-
-    public SharedOBJ() {
-        this.btPressed = true;
-    }
-
-    public boolean isBtPressed() {
-        return btPressed;
-    }
-
-    public void setBtPressed(boolean btPressed) {
-        this.btPressed = btPressed;
     }
 
     public int getCurrentFloor() {
