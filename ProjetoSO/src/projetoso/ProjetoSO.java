@@ -44,18 +44,6 @@ public class ProjetoSO implements ActionListener {
         new Thread(new Display(sh)).start();
         new Thread(new Botoneira(sh)).start();
 
-        /*
-        Thread th2 = new Thread(new Motor(sh));
-
-        th2.start();
-
-        System.out.println(sh.getPisoS());
-
-        try {
-            th2.join();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ProjetoSO.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
     }
 
     @Override
@@ -63,36 +51,31 @@ public class ProjetoSO implements ActionListener {
         int aux;
 
         if (e.getActionCommand() == "A") {
+            pt.setCommand("A");
             new Thread(pt).start();
 
         } else if (e.getActionCommand() == "F") {
-            if (queue.peek() == null) {
-
-            } else {
-                pt.setCommand("F");
-                new Thread(pt).start();
-                sh1.setPisoS(queue.poll());
-                startMotor();
-            }
+            pt.setCommand("F");
+            new Thread(pt).start();
         } else {
 
             System.out.println("Andar "
                     + ": " + e.getActionCommand());
-            queue.add(Integer.parseInt(e.getActionCommand()));     
+            queue.add(Integer.parseInt(e.getActionCommand()));
             startMotor();
 
         }
     }
 
     public void startMotor() {
-   
-        if(sh1.isDoorsOpen() == true){
+
+        if (sh1.isDoorsOpen() == true) {
             pt.setCommand("F");
             new Thread(pt).start();
         }
         new Thread(mt).start();
         mt.sendPisoS(queue);
-   
+
     }
 
 }

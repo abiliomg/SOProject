@@ -24,6 +24,11 @@ public class FileManager {
     private int carga;
     
     
+    public void writeToFile(int piso, int carga){
+        
+        
+    }
+    
    public void readFile(String path) {
        JSONParser parser = new JSONParser();
        

@@ -8,6 +8,7 @@ package projetoso;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,53 +25,18 @@ import javax.swing.SwingConstants;
  *
  * @author *Abílio - 8170054* | *Ricardo - 8170278* | *Vitor - 8170312*
  */
-class Action implements ActionListener {
-
-    private int pisoSelecionado;
-    SharedOBJ sh1;
-    private Motor mt;
-    Semaphore sem;
-
-    public Action(SharedOBJ sh, Motor mt) {
-        sh1 = sh;
-        sem = new Semaphore(1);
-        this.mt = mt;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-
-        System.out.println("Por favor:" + e.getActionCommand());
-        sh1.setPisoS(Integer.parseInt(e.getActionCommand()));
-        sh1.setBtPressed(false);
-
-        /*
-        try {
-            sem.acquire();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Action.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        new Thread(new Motor(sh1)).start();
-
-        if (sh1.getCurrentFloor() == Integer.parseInt(e.getActionCommand())) {
-            sem.release();
-        }
-         */
-    }
-
-    public int getPisoS() {
-        return this.pisoSelecionado;
-    }
-}
-
 public class Botoneira implements Runnable {
 
     private int pisoS;
-    private Action teste;
     private JButton[] aux;
     private SharedOBJ sh1;
     private Motor mt;
 
     public Botoneira(SharedOBJ sh) {
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
         sh1 = sh;
         FileManager fm = new FileManager();
         mt = new Motor(sh1);
@@ -97,13 +63,13 @@ public class Botoneira implements Runnable {
         //Definir tamanho da janela e localização inicial
         elevador.setSize(frameDimension);
         elevador.setMaximumSize(frameDimension);
-        elevador.setLocation(1920 / 2 - 200, 1080 / 2 - 150);
+        elevador.setLocation(width / 2 - 200, height / 2 - 150);
 
         // Construtor do label que apresenta o andar atual
         JLabel elevadorSign = new JLabel("");
         elevadorSign.setHorizontalAlignment(SwingConstants.LEFT);
         panela.add(elevadorSign);
-        elevadorSign.setSize(30,70);
+        elevadorSign.setSize(30, 70);
         JLabel andarMostrar = new JLabel("Bem-vindo ao elevador pressione um botão com o andar que pretende, e de seguida, feche a porta");
         panela.add(andarMostrar);
         JButton[] bt = new JButton[fm.getPisos()];
@@ -117,7 +83,7 @@ public class Botoneira implements Runnable {
         JLabel clear = new JLabel(" ");
         JLabel clear2 = new JLabel(" ");
         JLabel clear3 = new JLabel(" ");
-        
+
         //Ciclo que acrecenta botões dependendo do número de andares definido 
         while (i < fm.getPisos()) {
             piso = i;
@@ -148,10 +114,6 @@ public class Botoneira implements Runnable {
         System.out.println(fm.getCarga());
         System.out.println(fm.getPisos());
         aux = bt;
-
-    }
-
-    public void setPisoS(int pisoS) {
 
     }
 

@@ -31,24 +31,25 @@ public class Portas implements Runnable {
     public void run() {
         if (this.command == "F") {
             closeDoors();
-        } else if (this.command == "A") {
+        } else if (this.command == "A" && sh1.isMoving()== false) {
             openDoors();
         }
-
-        while(true){
-            if (!sh1.isMoving()){
-                openDoors();
-            }
-        }
+        
     }
 
     public void openDoors() {
         sh1.setDoorsOpen(true);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Portas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sh1.setDoorsOpen(false);
     }
 
-    public void closeDoors() {
+    public synchronized void closeDoors() {
         sh1.setDoorsOpen(false);
-
+       // notifyAll();
     }
 
 }

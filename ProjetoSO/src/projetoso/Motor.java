@@ -24,7 +24,7 @@ public class Motor implements Runnable {
 
     public Motor(SharedOBJ sh) {
         this.sh1 = sh;
-        this.sem = new Semaphore(1);
+        this.sem = new Semaphore(1, true);
     }
 
     @Override
@@ -39,8 +39,14 @@ public class Motor implements Runnable {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-       
+        while (sh1.isDoorsOpen()) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         sh1.setMoving(true);
         if (sh1.getPisoS() > sh1.getCurrentFloor()) {
             movingUp();
@@ -48,11 +54,10 @@ public class Motor implements Runnable {
             movingDown();
         } else {
             sem.release();
-           
+
         }
 
     }
-
 
     public synchronized void movingUp() {
         while (sh1.getPisoS() != sh1.getCurrentFloor()) {
@@ -71,7 +76,8 @@ public class Motor implements Runnable {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
         }
         sem.release();
-       
+        
+
     }
 
     public void sendPisoS(PriorityQueue pisoS) {
@@ -93,9 +99,9 @@ public class Motor implements Runnable {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }    
         sem.release();
-       
+
     }
 
 }
